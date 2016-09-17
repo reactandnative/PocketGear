@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
 
   amount: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontFamily: 'MontserratBold',
     margin: 4,
   },
 
@@ -118,7 +118,7 @@ export default class CPCalculator extends Component<void, Props, State> {
 
     return (
       <View {...this.props}>
-        <Heading>CP after evolution</Heading>
+        <Heading>CP Calculator</Heading>
         <SpinButton
           value={this.state.value}
           onChangeValue={this._handleChangeValue}
