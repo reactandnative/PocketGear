@@ -41,9 +41,6 @@ esproposal.export_star_as=enable
 
 experimental.strict_type_args=true
 
-
-experimental.strict_type_args=true
-
 munge_underscores=true
 
 module.name_mapper='^image![a-zA-Z0-9$_-]+$' -> 'GlobalImageStub'

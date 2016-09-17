@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     height: BAR_HEIGHT,
-    marginTop: Platform.OS === 'ios' ? 20 : 24,
+    marginTop: Platform.OS === 'ios' ? 20 : 0,
     elevation: 2,
     backgroundColor: '#fff',
     borderBottomColor: 'rgba(0, 0, 0, 0.16)',

@@ -14,7 +14,7 @@
   "androidStatusBarColor": "#000000",
   "packagerOpts": {
     "assetExts": [
-      "ttf", "otf",
+      "ttf", "otf"
     ]
   }
 }

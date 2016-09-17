@@ -3,7 +3,6 @@
 import { Font, Components } from 'exponent';
 import { MaterialIcons } from '@exponent/vector-icons';
 import React, { Component } from 'react';
-import { Platform, StatusBar, View } from 'react-native';
 import NavigationRoot from './Navigation/NavigationRoot';
 import NavigationScene from './Navigation/NavigationScene';
 import NavigationView from './Navigation/NavigationView';
@@ -11,45 +10,33 @@ import routeMapper from './Navigation/routeMapper';
 
 const PERSISTANCE_KEY = process.env.NODE_ENV !== 'production' ? 'FLAT_PERSISTENCE_0' : null;
 
-export default class Home extends Component<void, void, void> {
+type State = {
+  bootstrapped: boolean;
+}
 
-  state = {
+export default class Home extends Component<void, void, State> {
+
+  state: State = {
     bootstrapped: false,
   };
 
-  async componentWillMount() {
+  componentWillMount() {
+    this._bootstrap();
+  }
+
+  _bootstrap = async () => {
     await Font.loadAsync({
+      /* $FlowFixMe */
       Montserrat: require('../../assets/fonts/Montserrat.otf'),
+      /* $FlowFixMe */
       MontserratBold: require('../../assets/fonts/Montserrat_bold.otf'),
       ...MaterialIcons.font,
     });
 
-    requestAnimationFrame(() => {
-      this.setState({bootstrapped: true});
+    global.requestAnimationFrame(() => {
+      this.setState({ bootstrapped: true });
     });
-  }
-
-  render() {
-    if (!this.state.bootstrapped) {
-      return <Components.AppLoading />
-    }
-
-    return (
-      <View style={{flex: 1}}>
-        <NavigationRoot
-          initialRoute={{ name: 'home' }}
-          persistenceKey={PERSISTANCE_KEY}
-          renderNavigator={this._renderNavigator}
-        />
-
-        <StatusBar
-          barStyle={Platform.OS === 'android' ? 'light-content' : 'default'}
-          backgroundColor="#000"
-          translucent
-        />
-      </View>
-    );
-  }
+  };
 
   _renderScene = (props: any) => {
     return (
@@ -69,4 +56,18 @@ export default class Home extends Component<void, void, void> {
       />
     );
   };
+
+  render() {
+    if (!this.state.bootstrapped) {
+      return <Components.AppLoading />;
+    }
+
+    return (
+      <NavigationRoot
+        initialRoute={{ name: 'home' }}
+        persistenceKey={PERSISTANCE_KEY}
+        renderNavigator={this._renderNavigator}
+      />
+    );
+  }
 }
