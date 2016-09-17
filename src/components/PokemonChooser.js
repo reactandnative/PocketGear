@@ -5,7 +5,6 @@ import debounce from 'lodash/debounce';
 import React, { PropTypes, Component } from 'react';
 import {
   KeyboardAvoidingView,
-  View,
   StyleSheet,
   Platform,
 } from 'react-native';
@@ -23,17 +22,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#fafafa',
   },
 
-  list: {
-    paddingTop: Platform.OS === 'android' ? 85 : 65,
-  },
-
   searchbar: {
-    position: 'absolute',
-    elevation: 2,
-    top: 0,
-    left: 0,
-    right: 0,
-    backgroundColor: '#fafafa',
+    backgroundColor: Platform.OS === 'ios' ? '#fafafa' : '#fff',
   },
 });
 
@@ -113,11 +103,16 @@ export default class PokemonChooser extends Component<void, Props, State> {
   render() {
     return (
       <KeyboardAvoidingView style={styles.page}>
+        <SearchBar
+          placeholder='Find Pokémon by name, type or index'
+          value={this.state.query}
+          onChangeSearch={this._handleSearchChange}
+          style={styles.searchbar}
+        />
         {this.state.results.pokemons.length ?
           <PokemonList
             scrollsToTop
             keyboardShouldPersistTaps
-            contentContainerStyle={styles.list}
             data={this.state.results}
             onNavigate={this.props.onNavigate}
             ref={this._setRef}
@@ -128,13 +123,6 @@ export default class PokemonChooser extends Component<void, Props, State> {
             ref={this._unsetRef}
           />
         }
-        <View style={styles.searchbar}>
-          <SearchBar
-            placeholder='Find Pokémon by name, type or index'
-            value={this.state.query}
-            onChangeSearch={this._handleSearchChange}
-          />
-        </View>
       </KeyboardAvoidingView>
     );
   }

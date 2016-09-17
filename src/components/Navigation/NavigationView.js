@@ -77,7 +77,7 @@ export default class NavigationView extends Component<void, Props, void> {
     });
   };
 
-  _configureTransition = (transitionProps, previousTransitionProps) => {
+  _configureTransition = (transitionProps: any, previousTransitionProps: any) => {
     let speed = 15;
     let restSpeedThreshold = 0.001;
     let restDisplacementThreshold = 0.001;
@@ -103,9 +103,9 @@ export default class NavigationView extends Component<void, Props, void> {
     return (
       <NavigationTransitioner
         {...this.props}
-        configureTransition={this._configureTransition}
         render={this._render}
         style={[ styles.container, this.props.style ]}
+        configureTransition={this._configureTransition}
       />
     );
   }
