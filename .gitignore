@@ -31,13 +31,17 @@ project.xcworkspace
 .gradle
 local.properties
 
+# VSCode
+.vscode/
+tsconfig.json
+
 # node.js
 #
 node_modules/
 npm-debug.log
 
 # Istanbul
-.nyc_output/
+coverage/
 
 # BUCK
 buck-out/
