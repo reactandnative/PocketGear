@@ -24,7 +24,7 @@ export default class App extends Component<void, void, State> {
       /* $FlowFixMe */
       Montserrat: require('./assets/fonts/Montserrat.otf'),
       /* $FlowFixMe */
-      MontserratBold: require('./assets/fonts/Montserrat_bold.otf'),
+      MontserratBold: require('./assets/fonts/MontserratBold.otf'),
       ...MaterialIcons.font,
     });
 

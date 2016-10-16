@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -16,24 +17,14 @@
 		139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139105C11AF99BAD00B5F7CC /* libRCTSettings.a */; };
 		139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139FDEF41B06529B00C62182 /* libRCTWebSocket.a */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
-		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
-		45F8D7932AD44C1C8AAFB065 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9F885DB53ADA4BB987C99A8D /* FontAwesome.ttf */; };
-		52EB9EF11D5579B700C76F2B /* Montserrat.otf in Resources */ = {isa = PBXBuildFile; fileRef = 52EB9EEF1D5579B700C76F2B /* Montserrat.otf */; };
-		52EB9EF21D5579B700C76F2B /* Montserrat_bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 52EB9EF01D5579B700C76F2B /* Montserrat_bold.otf */; };
-		537FF8B2F6B74B51A3AE4EB3 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D3B022E75527495CB01F6682 /* Foundation.ttf */; };
-		6D4A6205D85143D786EF33CE /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F19764030ABD40AAB2D10FD9 /* Entypo.ttf */; };
-		8297C86B3A6B496FB1BA45D8 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A112112DE07472E8B24DBB7 /* libRNVectorIcons.a */; };
+		52B3010D1DB2FB7D00622FCD /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = 52B3010C1DB2FB7D00622FCD /* fonts */; };
+		52B3010F1DB2FB9600622FCD /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = 52B3010E1DB2FB9600622FCD /* fonts */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
-		832FABFF32874FD9A63A965A /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EFDE03CCF95441DEA5B43089 /* Zocial.ttf */; };
-		B109B876F1A14F1D9E8DD2D2 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3B020F558FF345A9B4B0E664 /* Ionicons.ttf */; };
 		CC97CEEC1D5CC628005E03E5 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CC97CEEB1D5CC628005E03E5 /* Default-568h@2x.png */; };
-		D2494C4F67604FC4A511DA2C /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 75618D3E2B94496F86A05496 /* MaterialIcons.ttf */; };
-		DD6AD06064EE4BFC9FF8A3B7 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CBEF18E34A814B7BB4028853 /* EvilIcons.ttf */; };
-		EEE4246C088F469D94F60FB1 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E5C5DBDE41364F1D89E5DD49 /* Octicons.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -133,7 +124,6 @@
 		00E356EE1AD99517003FC87E /* PocketGearTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PocketGearTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* PocketGearTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PocketGearTests.m; sourceTree = "<group>"; };
-		0A112112DE07472E8B24DBB7 /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
 		139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSettings.xcodeproj; path = "../node_modules/react-native/Libraries/Settings/RCTSettings.xcodeproj"; sourceTree = "<group>"; };
 		139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTWebSocket.xcodeproj; path = "../node_modules/react-native/Libraries/WebSocket/RCTWebSocket.xcodeproj"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* PocketGear.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PocketGear.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -145,8 +135,8 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = PocketGear/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		3B020F558FF345A9B4B0E664 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
-		52EB9EEF1D5579B700C76F2B /* Montserrat.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Montserrat.otf; sourceTree = "<group>"; };
-		52EB9EF01D5579B700C76F2B /* Montserrat_bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Montserrat_bold.otf; sourceTree = "<group>"; };
+		52B3010C1DB2FB7D00622FCD /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = fonts; path = ../assets/fonts; sourceTree = "<group>"; };
+		52B3010E1DB2FB9600622FCD /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = fonts; path = "../node_modules/@exponent/vector-icons/fonts"; sourceTree = "<group>"; };
 		75618D3E2B94496F86A05496 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
@@ -183,7 +173,6 @@
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
-				8297C86B3A6B496FB1BA45D8 /* libRNVectorIcons.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,16 +282,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		52EB9EEE1D5579B700C76F2B /* fonts */ = {
-			isa = PBXGroup;
-			children = (
-				52EB9EEF1D5579B700C76F2B /* Montserrat.otf */,
-				52EB9EF01D5579B700C76F2B /* Montserrat_bold.otf */,
-			);
-			name = fonts;
-			path = ../assets/fonts;
-			sourceTree = "<group>";
-		};
 		78C398B11ACF4ADC00677621 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -340,8 +319,9 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				52B3010E1DB2FB9600622FCD /* fonts */,
+				52B3010C1DB2FB7D00622FCD /* fonts */,
 				CC97CEEB1D5CC628005E03E5 /* Default-568h@2x.png */,
-				52EB9EEE1D5579B700C76F2B /* fonts */,
 				13B07FAE1A68108700A75B9A /* PocketGear */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* PocketGearTests */,
@@ -421,7 +401,7 @@
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 610;
+				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = Facebook;
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
@@ -590,19 +570,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				52B3010F1DB2FB9600622FCD /* fonts in Resources */,
+				52B3010D1DB2FB7D00622FCD /* fonts in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
-				6D4A6205D85143D786EF33CE /* Entypo.ttf in Resources */,
-				DD6AD06064EE4BFC9FF8A3B7 /* EvilIcons.ttf in Resources */,
-				45F8D7932AD44C1C8AAFB065 /* FontAwesome.ttf in Resources */,
-				537FF8B2F6B74B51A3AE4EB3 /* Foundation.ttf in Resources */,
-				52EB9EF11D5579B700C76F2B /* Montserrat.otf in Resources */,
-				B109B876F1A14F1D9E8DD2D2 /* Ionicons.ttf in Resources */,
-				D2494C4F67604FC4A511DA2C /* MaterialIcons.ttf in Resources */,
 				CC97CEEC1D5CC628005E03E5 /* Default-568h@2x.png in Resources */,
-				52EB9EF21D5579B700C76F2B /* Montserrat_bold.otf in Resources */,
-				EEE4246C088F469D94F60FB1 /* Octicons.ttf in Resources */,
-				832FABFF32874FD9A63A965A /* Zocial.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -677,9 +648,8 @@
 				INFOPLIST_FILE = PocketGearTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PocketGear.app/PocketGear";
 			};
@@ -693,9 +663,8 @@
 				INFOPLIST_FILE = PocketGearTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PocketGear.app/PocketGear";
 			};
@@ -770,6 +739,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
