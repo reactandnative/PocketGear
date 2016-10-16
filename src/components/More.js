@@ -4,10 +4,10 @@ import React from 'react';
 import {
   View,
   Text,
-  TouchableOpacity,
   StyleSheet,
 } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import TouchableItem from './TouchableItem';
 
 const styles = StyleSheet.create({
   card: {
@@ -48,7 +48,7 @@ type Props = {
 
 export default function More(props: Props) {
   return (
-    <TouchableOpacity {...props} style={[ styles.card, styles.center, props.style ]}>
+    <TouchableItem {...props} style={[ styles.card, styles.center, props.style ]}>
       <View style={styles.center}>
         <View style={styles.button}>
           <MaterialIcons
@@ -59,6 +59,6 @@ export default function More(props: Props) {
         </View>
         <Text style={styles.more}>more</Text>
       </View>
-    </TouchableOpacity>
+    </TouchableItem>
   );
 }
