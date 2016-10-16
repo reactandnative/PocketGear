@@ -16,7 +16,7 @@
     "lodash": "^4.16.4",
     "react": "~15.3.2",
     "react-addons-shallow-compare": "~15.3.2",
-    "react-native": "github:exponentjs/react-native#sdk-10.0.0",
+    "react-native": "github:exponentjs/react-native#sdk-10.1.4",
     "react-native-tab-view": "^0.0.34",
     "react-native-uuid": "^1.4.8",
     "react-native-vector-icons": "github:exponentjs/react-native-vector-icons"
