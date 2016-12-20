@@ -1,9 +1,7 @@
 /* @flow */
 
-import React, { PropTypes, Component } from 'react';
-import shallowCompare from 'react-addons-shallow-compare';
+import React, { PropTypes, PureComponent } from 'react';
 import {
-  Dimensions,
   StyleSheet,
 } from 'react-native';
 import GridView from './GridView';
@@ -28,11 +26,7 @@ type Props = {
 
 const CARD_WIDTH = 160;
 
-// FIXME: We set the list size to fix ListView not loading all items
-const win = Dimensions.get('window');
-const LIST_SIZE = (win.height / CARD_WIDTH) * (win.width / CARD_WIDTH);
-
-export default class PokemonList extends Component<void, Props, void> {
+export default class PokemonList extends PureComponent<void, Props, void> {
 
   static propTypes = {
     onNavigate: PropTypes.func.isRequired,
@@ -41,10 +35,6 @@ export default class PokemonList extends Component<void, Props, void> {
     }).isRequired,
     style: GridView.propTypes.style,
   };
-
-  shouldComponentUpdate(nextProps: Props, nextState: void) {
-    return shallowCompare(this, nextProps, nextState);
-  }
 
   scrollTo(options: any) {
     this._root.scrollTo(options);
@@ -66,7 +56,7 @@ export default class PokemonList extends Component<void, Props, void> {
     return (
       <GridView
         {...this.props}
-        pageSize={LIST_SIZE}
+        pageSize={2}
         style={[ styles.grid, this.props.style ]}
         spacing={8}
         renderRow={this._renderRow}

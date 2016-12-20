@@ -22,7 +22,7 @@ export type PokemonType =
 
 export type PokemonID = number;
 
-export type Pokemon = {
+export type Pokemon = {|
   id: PokemonID;
   name: string;
   types: Array<PokemonType>;
@@ -32,61 +32,69 @@ export type Pokemon = {
     term: string;
     meaning: string;
   }>;
-  height: {
-    amount: number;
-    unit: 'm' | 'cm';
+  moves: {
+    quick: Array<string>;
+    cinematic: Array<string>;
   };
-  weight: {
-    amount: number;
-    unit: 'g' | 'kg';
+  measurements: {
+    height: {
+      amount: number;
+      unit: 'm' | 'cm';
+    };
+    weight: {
+      amount: number;
+      unit: 'g' | 'kg';
+    };
   };
-  average_cp: number;
-  average_hp: number;
-  max_cp: number;
-  max_hp: number;
-  stamina: number;
-  attack: number;
-  defense: number;
-  capture_rate: number;
-  flee_rate: number;
-  egg_distance?: {
-    amount: number;
-    unit: 'km';
+  stats: {
+    stamina: number;
+    attack: number;
+    defense: number;
+  };
+  points: {
+    max_cp: number;
   };
   evolution_chains?: Array<Array<PokemonID>>;
-  evolution_requirements: {
-    amount: number;
-    name: string;
-  };
-  evolution_cp_multipliers?: Array<{
+  evolution_cp_multipliers: Array<{
     id: PokemonID;
     multipliers: {
       minimum: number;
       maximum: number;
     };
   }>;
+  egg_distance?: {
+    amount: number;
+    unit: 'km';
+  };
+  buddy_distance?: {
+    amount: number;
+    unit: 'km';
+  };
+  evolution_requirements: {
+    amount: number;
+    name: string;
+  };
+  encounter: {
+    capture_rate: number;
+    flee_rate: number;
+  };
   easter_eggs?: Array<string>;
-}
+|}
 
-export type TypeChart = {
+export type TypeChart = {|
   name: PokemonType;
   super_effective: Array<PokemonType>;
   not_very_effective: Array<PokemonType>;
-}
+|}
 
-export type Attack = {
+export type Move = {|
   name: string;
   type: PokemonType;
-  damage: number;
+  power: number;
   duration: number;
-  known_by: Array<PokemonID>;
-}
-
-export type QuickAttack = Attack & {
-  energy_increase: number;
-}
-
-export type SpecialAttack = Attack & {
-  critical_hit_chance: number;
-  energy_requirement: number;
-}
+  energy_delta: number;
+  accuracy_chance: number;
+  critical_chance?: number;
+  stamina_loss: number;
+  quick: boolean;
+|}

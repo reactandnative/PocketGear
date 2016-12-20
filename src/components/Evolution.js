@@ -1,7 +1,7 @@
 /* @flow */
 
 import difference from 'lodash/difference';
-import React, { PropTypes, Component } from 'react';
+import React, { PropTypes, PureComponent } from 'react';
 import {
   View,
   Image,
@@ -67,7 +67,7 @@ type Props = {
   onNavigate: Function;
 }
 
-export default class Evolution extends Component<void, Props, void> {
+export default class Evolution extends PureComponent<void, Props, void> {
 
   static propTypes = {
     pokemon: PropTypes.object.isRequired,
@@ -122,7 +122,7 @@ export default class Evolution extends Component<void, Props, void> {
     return (
       <View {...this.props}>
         <Heading>Evolution</Heading>
-        {pokemon.evolution_requirements ?
+        {pokemon.evolution_requirements && pokemon.evolution_requirements.name ?
           <Text style={styles.requirements}>
             {pokemon.evolution_requirements.amount} {pokemon.evolution_requirements.name}
           </Text> :

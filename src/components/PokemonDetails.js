@@ -1,7 +1,7 @@
 /* @flow */
 
-import React, { PropTypes, Component } from 'react';
-import shallowCompare from 'react-addons-shallow-compare';
+import difference from 'lodash/difference';
+import React, { PropTypes, PureComponent } from 'react';
 import {
   View,
   Text,
@@ -23,8 +23,7 @@ import store from '../store';
 import type {
   Pokemon,
   PokemonID,
-  QuickAttack,
-  SpecialAttack,
+  Move,
 } from '../typeDefinitions';
 
 const styles = StyleSheet.create({
@@ -48,12 +47,20 @@ const styles = StyleSheet.create({
   },
 
   strong: {
-    fontWeight: 'bold',
+    fontFamily: 'MontserratBold',
   },
 
   row: {
     flexDirection: 'row',
     marginVertical: 4,
+  },
+
+  origin: {
+    marginVertical: 10,
+  },
+
+  term: {
+    marginVertical: 2,
   },
 
   wrap: {
@@ -68,7 +75,7 @@ const styles = StyleSheet.create({
   },
 
   measurement: {
-    width: 80,
+    width: 120,
   },
 
   label: {
@@ -88,17 +95,13 @@ type Props = {
   onNavigate: Function;
 }
 
-export default class PokemonDetails extends Component<void, Props, void> {
+export default class PokemonDetails extends PureComponent<void, Props, void> {
 
   static propTypes = {
     pokemon: PropTypes.object.isRequired,
     style: ScrollView.propTypes.style,
     onNavigate: PropTypes.func.isRequired,
   };
-
-  shouldComponentUpdate(nextProps: Props, nextState: void) {
-    return shallowCompare(this, nextProps, nextState);
-  }
 
   _goToPokemon = (pokemonId: PokemonID) => () => {
     this.props.onNavigate({
@@ -122,12 +125,12 @@ export default class PokemonDetails extends Component<void, Props, void> {
     );
   };
 
-  _renderAttack = (attack: QuickAttack | SpecialAttack) => {
+  _renderAttack = (move: Move) => {
     return (
       <Attack
-        key={attack.name}
+        key={move.name}
         style={styles.row}
-        attack={attack}
+        move={move}
       />
     );
   };
@@ -137,12 +140,12 @@ export default class PokemonDetails extends Component<void, Props, void> {
     const maxValues = store.getMaxValues();
     const quickAttacks = getQuickAttacks(pokemon);
     const specialAttacks = getSpecialAttacks(pokemon);
-    const strongAgainst = getStrongAgainstTypes(pokemon);
-    const weakAgainst = getWeakAgainstTypes(pokemon);
-    const resistantTo = getResistantToTypes(pokemon)
-      .filter(type =>
-        !(strongAgainst.includes(type) || weakAgainst.includes(type))
-      );
+    const strongAgainstAll = getStrongAgainstTypes(pokemon);
+    const weakAgainstAll = getWeakAgainstTypes(pokemon);
+    const resistantToAll = getResistantToTypes(pokemon);
+    const strongAgainst = difference(strongAgainstAll, weakAgainstAll);
+    const weakAgainst = difference(weakAgainstAll, strongAgainstAll);
+    const resistantTo = difference(resistantToAll, [ ...weakAgainst, ...strongAgainst ]);
 
     return (
       <ScrollView {...this.props} style={[ styles.container, this.props.style ]}>
@@ -153,26 +156,49 @@ export default class PokemonDetails extends Component<void, Props, void> {
             <Paragraph>{pokemon.description}</Paragraph>
           </View>
 
-          <View style={styles.item}>
+          <View style={styles.origin}>
             {pokemon.name_origin.map(({ term, meaning }) => (
-              <View key={term}>
-                <Paragraph>
-                  <Text style={[ styles.text, styles.strong ]}>{term}</Text>
-                  <Text>{'    '}</Text>
-                  <Text>{meaning}</Text>
-                </Paragraph>
-              </View>
+              <Paragraph style={styles.term} key={term}>
+                <Text style={[ styles.text, styles.strong ]}>{term}</Text>
+                <Text>{'    '}</Text>
+                <Text>{meaning}</Text>
+              </Paragraph>
             ))}
           </View>
+
+          {pokemon.egg_distance || pokemon.buddy_distance ?
+            <View style={styles.item}>
+            {pokemon.egg_distance ?
+              <View style={[ styles.row, styles.center ]}>
+                <Text selectable style={[ styles.text, styles.strong, styles.measurement ]}>Egg Group</Text>
+                <Text selectable style={styles.text}>
+                  {pokemon.egg_distance.amount} {pokemon.egg_distance.unit}
+                </Text>
+              </View> : null
+            }
+            {pokemon.buddy_distance ?
+              <View style={[ styles.row, styles.center ]}>
+                <Text selectable style={[ styles.text, styles.strong, styles.measurement ]}>Candy Distance</Text>
+                <Text selectable style={styles.text}>
+                  {pokemon.buddy_distance.amount} {pokemon.buddy_distance.unit}
+                </Text>
+              </View> : null
+            }
+          </View> : null
+          }
 
           <View style={styles.item}>
             <View style={[ styles.row, styles.center ]}>
               <Text selectable style={[ styles.text, styles.strong, styles.measurement ]}>Height</Text>
-              <Text selectable style={styles.text}>{pokemon.height.amount} {pokemon.height.unit}</Text>
+              <Text selectable style={styles.text}>
+                {pokemon.measurements.height.amount} {pokemon.measurements.height.unit}
+              </Text>
             </View>
             <View style={[ styles.row, styles.center ]}>
               <Text selectable style={[ styles.text, styles.strong, styles.measurement ]}>Weight</Text>
-              <Text selectable style={styles.text}>{pokemon.weight.amount} {pokemon.weight.unit}</Text>
+              <Text selectable style={styles.text}>
+                {pokemon.measurements.weight.amount} {pokemon.measurements.weight.unit}
+              </Text>
             </View>
           </View>
 
@@ -212,13 +238,12 @@ export default class PokemonDetails extends Component<void, Props, void> {
           </View>
 
           <View style={styles.item}>
-            {this._renderStat('Attack', pokemon.attack / maxValues.attack, pokemon.attack, '#ff8a65')}
-            {this._renderStat('Defense', pokemon.defense / maxValues.defense, pokemon.defense, '#9575cd')}
-            {this._renderStat('Stamina', pokemon.stamina / maxValues.stamina, pokemon.stamina, '#5499c7')}
-            {this._renderStat('Capture Rate', pokemon.capture_rate, (pokemon.capture_rate * 100).toFixed(2) + '%', '#f06292')}
-            {this._renderStat('Flee Rate', pokemon.flee_rate, (pokemon.flee_rate * 100).toFixed(2) + '%', '#ffd54f')}
-            {this._renderStat('Max CP', pokemon.max_cp / maxValues.max_cp, pokemon.max_cp, '#e57373')}
-            {this._renderStat('Max HP', pokemon.max_hp / maxValues.max_hp, pokemon.max_hp, '#4db6ac')}
+            {this._renderStat('Attack', pokemon.stats.attack / maxValues.attack, pokemon.stats.attack, '#ff8a65')}
+            {this._renderStat('Defense', pokemon.stats.defense / maxValues.defense, pokemon.stats.defense, '#9575cd')}
+            {this._renderStat('Stamina', pokemon.stats.stamina / maxValues.stamina, pokemon.stats.stamina, '#5499c7')}
+            {this._renderStat('Capture Rate', pokemon.encounter.capture_rate, (pokemon.encounter.capture_rate * 100).toFixed(2) + '%', '#f06292')}
+            {this._renderStat('Flee Rate', pokemon.encounter.flee_rate, (pokemon.encounter.flee_rate * 100).toFixed(2) + '%', '#ffd54f')}
+            {this._renderStat('Max CP', pokemon.points.max_cp / maxValues.max_cp, pokemon.points.max_cp, '#e57373')}
           </View>
 
           {pokemon.evolution_chains ?

@@ -1,14 +1,13 @@
 /* @flow */
 
-import React, { Component, PropTypes } from 'react';
-import ReactNative from 'react-native';
-
-const {
+import React, { PureComponent, PropTypes } from 'react';
+import {
+  Platform,
   Dimensions,
   ListView,
   StyleSheet,
   View,
-} = ReactNative;
+} from 'react-native';
 
 const styles = StyleSheet.create({
   grid: {
@@ -39,7 +38,7 @@ type State = {
   containerWidth: number;
 }
 
-export default class GridView extends Component<DefaultProps, Props, State> {
+export default class GridView extends PureComponent<DefaultProps, Props, State> {
   static propTypes = {
     data: PropTypes.objectOf(PropTypes.array).isRequired,
     spacing: PropTypes.number.isRequired,
@@ -56,29 +55,27 @@ export default class GridView extends Component<DefaultProps, Props, State> {
     spacing: 0,
   };
 
-  constructor(props: Props) {
-    super(props);
-
-    this.state = {
-      dataSource: new ListView.DataSource({
-        rowHasChanged: (r1, r2) => r1 !== r2,
-        sectionHeaderHasChanged: (s1, s2) => s1 !== s2,
-      }),
-      containerWidth: Dimensions.get('window').width,
-    };
-  }
-
-  state: State;
+  state: State = {
+    dataSource: new ListView.DataSource({
+      rowHasChanged: (r1, r2) => r1 !== r2,
+      sectionHeaderHasChanged: (s1, s2) => s1 !== s2,
+    }),
+    containerWidth: Dimensions.get('window').width,
+  };
 
   componentWillMount() {
     this.setState({
-      dataSource: this.state.dataSource.cloneWithRowsAndSections(this.props.data),
+      dataSource: this.state.dataSource.cloneWithRowsAndSections(
+        this._processData(this.state.containerWidth, this.props)
+      ),
     });
   }
 
   componentWillReceiveProps(nextProps: Props) {
     this.setState({
-      dataSource: this.state.dataSource.cloneWithRowsAndSections(nextProps.data),
+      dataSource: this.state.dataSource.cloneWithRowsAndSections(
+        this._processData(this.state.containerWidth, nextProps)
+      ),
     });
   }
 
@@ -98,18 +95,27 @@ export default class GridView extends Component<DefaultProps, Props, State> {
   };
 
   _renderRow = (rowData: any, sectionID: string, rowID: string, highlightRow: boolean) => {
-    const { containerWidth } = this.state;
-    const { spacing, getNumberOfColumns } = this.props;
     return (
-      <View
-        style={{
-          margin: spacing / 2,
-          width: ((containerWidth - spacing) / getNumberOfColumns(containerWidth)) - spacing,
-        }}
-      >
-        {this.props.renderRow(rowData, sectionID, rowID, highlightRow)}
+      <View style={rowData.style}>
+        {this.props.renderRow(rowData.tile, sectionID, rowID, highlightRow)}
       </View>
     );
+  };
+
+  _processData = (containerWidth: number, props: Props) => {
+    const { getNumberOfColumns, spacing, data } = props;
+    const style = {
+      width: ((containerWidth - spacing) / getNumberOfColumns(containerWidth)) - spacing,
+      margin: spacing / 2,
+    };
+    const nextData = {};
+    for (const prop in data) {
+      nextData[prop] = data[prop].map(tile => ({
+        tile,
+        style,
+      }));
+    }
+    return nextData;
   };
 
   _handleLayout = (e: any) => {
@@ -117,8 +123,17 @@ export default class GridView extends Component<DefaultProps, Props, State> {
       this.props.onLayout(e);
     }
 
+    if (this.state.containerWidth === e.nativeEvent.layout.width) {
+      return;
+    }
+
+    const containerWidth = e.nativeEvent.layout.width;
+
     this.setState({
-      containerWidth: e.nativeEvent.layout.width,
+      containerWidth,
+      dataSource: this.state.dataSource.cloneWithRowsAndSections(
+        this._processData(containerWidth, this.props)
+      ),
     });
   };
 
@@ -128,7 +143,7 @@ export default class GridView extends Component<DefaultProps, Props, State> {
     return (
       <ListView
         {...this.props}
-        removeClippedSubviews={false}
+        removeClippedSubviews={Platform.OS !== 'ios'}
         enableEmptySections={false}
         dataSource={this.state.dataSource}
         onLayout={this._handleLayout}

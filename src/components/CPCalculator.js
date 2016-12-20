@@ -1,6 +1,6 @@
 /* @flow */
 
-import React, { PropTypes, Component } from 'react';
+import React, { PropTypes, PureComponent } from 'react';
 import {
   View,
   Image,
@@ -45,8 +45,8 @@ const styles = StyleSheet.create({
   },
 
   amount: {
+    fontFamily: 'MontserratBold',
     fontSize: 18,
-    fontWeight: 'bold',
     margin: 4,
   },
 
@@ -76,7 +76,7 @@ type State = {
   value: number;
 }
 
-export default class CPCalculator extends Component<void, Props, State> {
+export default class CPCalculator extends PureComponent<void, Props, State> {
 
   static propTypes = {
     pokemon: PropTypes.object,
@@ -87,7 +87,7 @@ export default class CPCalculator extends Component<void, Props, State> {
     super(props);
 
     this.state = {
-      value: Math.round(this.props.pokemon.average_cp),
+      value: Math.round(this.props.pokemon.points.max_cp / 2),
     };
   }
 
@@ -116,6 +116,16 @@ export default class CPCalculator extends Component<void, Props, State> {
 
     const pokemons = store.getPokemons();
 
+    if (!pokemon.evolution_cp_multipliers) {
+      return (
+        <View {...this.props}>
+          <Text style={styles.text}>
+            CP Calculator is not available for this Pokémon.
+          </Text>
+        </View>
+      );
+    }
+
     return (
       <View {...this.props}>
         <Heading>CP after evolution</Heading>
@@ -125,7 +135,7 @@ export default class CPCalculator extends Component<void, Props, State> {
           style={styles.spinbutton}
         />
         <View style={styles.container}>
-          {pokemon.evolution_cp_multipliers ? pokemon.evolution_cp_multipliers.map(it => {
+          {pokemon.evolution_cp_multipliers.map(it => {
             const poke = pokemons.find(p => p.id === it.id);
             const minimum = (this.state.value || 0) * it.multipliers.minimum;
             const maximum = (this.state.value || 0) * it.multipliers.maximum;
@@ -149,7 +159,7 @@ export default class CPCalculator extends Component<void, Props, State> {
                   </View>
               </TouchableOpacity>
             );
-          }) : null}
+          })}
         </View>
       </View>
     );

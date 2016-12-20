@@ -1,6 +1,6 @@
 /* @flow */
 
-import React, { PropTypes, Component } from 'react';
+import React, { PropTypes, PureComponent } from 'react';
 import {
   View,
   TextInput,
@@ -56,7 +56,7 @@ type Props = {
   style?: any;
 }
 
-export default class SpinButton extends Component<void, Props, void> {
+export default class SpinButton extends PureComponent<void, Props, void> {
 
   static propTypes = {
     value: PropTypes.number.isRequired,
@@ -95,6 +95,7 @@ export default class SpinButton extends Component<void, Props, void> {
           value={isNaN(value) ? '' : value.toString()}
           onChange={onChange}
           onChangeText={this._handleChangeText}
+          selectionColor='rgba(0, 0, 0, .32)'
           style={[ styles.text, styles.input ]}
         />
         <TouchableButton onPress={this._handleIncrement} style={styles.button}>

@@ -1,6 +1,6 @@
 /* @flow */
 
-import React, { Component, PropTypes } from 'react';
+import React, { PureComponent, PropTypes } from 'react';
 import ReactNative from 'react-native';
 import type { NavigationState } from './NavigationTypeDefinitions';
 
@@ -8,7 +8,6 @@ const {
   Animated,
   BackAndroid,
   NavigationExperimental,
-  Platform,
   StyleSheet,
 } = ReactNative;
 
@@ -29,7 +28,7 @@ type Props = {
   style?: any;
 }
 
-export default class NavigationView extends Component<void, Props, void> {
+export default class NavigationView extends PureComponent<void, Props, void> {
   static propTypes = {
     navigationState: PropTypes.object.isRequired,
     onNavigate: PropTypes.func.isRequired,
@@ -95,7 +94,7 @@ export default class NavigationView extends Component<void, Props, void> {
       speed,
       restSpeedThreshold,
       restDisplacementThreshold,
-      useNativeDriver: Platform.OS === 'android',
+      useNativeDriver: true,
     };
   }
 

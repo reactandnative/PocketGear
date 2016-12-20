@@ -2,7 +2,7 @@
 
 import filter from 'lodash/filter';
 import debounce from 'lodash/debounce';
-import React, { PropTypes, Component } from 'react';
+import React, { PropTypes, PureComponent } from 'react';
 import {
   View,
   KeyboardAvoidingView,
@@ -43,7 +43,7 @@ type Props = {
   onNavigate: Function;
 }
 
-export default class PokemonChooser extends Component<void, Props, State> {
+export default class PokemonChooser extends PureComponent<void, Props, State> {
 
   static propTypes = {
     onNavigate: PropTypes.func.isRequired,
@@ -56,7 +56,8 @@ export default class PokemonChooser extends Component<void, Props, State> {
     },
   };
 
-  _getResults = (query: string) => {
+  _getResults = (text: string) => {
+    const query = text.toLowerCase().trim();
     const pokemons = store.getPokemons();
 
     if (query) {
@@ -65,8 +66,11 @@ export default class PokemonChooser extends Component<void, Props, State> {
       }
       return filter(pokemons, (pokemon => {
         return (
-          pokemon.name.toLowerCase().indexOf(query.toLowerCase()) === 0 ||
-          pokemon.types.some(type => type.toLowerCase().indexOf(query.toLowerCase()) === 0)
+          /* String#startsWith doesn't work properly for unicode */
+          pokemon.name.toLowerCase().indexOf(query) === 0 ||
+          query.split(',').map(q => q.trim()).every(q =>
+            pokemon.types.some(type => type.toLowerCase().indexOf(q) === 0)
+          )
         );
       }));
     }

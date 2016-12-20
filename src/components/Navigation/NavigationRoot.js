@@ -1,9 +1,8 @@
 /* @flow */
 
-import { Component, PropTypes } from 'react';
-import { AsyncStorage } from 'react-native';
-import dismissKeyboard from 'react-native/Libraries/Utilities/dismissKeyboard';
-import { v4 } from 'react-native-uuid';
+import { PureComponent, PropTypes } from 'react';
+import { AsyncStorage, Keyboard } from 'react-native';
+import { v4 } from 'uuid';
 import isEqual from 'lodash/isEqual';
 import type { Route, NavigationState, NavigationAction } from './NavigationTypeDefinitions';
 
@@ -18,7 +17,7 @@ type State = {
   navigation: NavigationState;
 }
 
-export default class NavigationRoot extends Component<void, Props, State> {
+export default class NavigationRoot extends PureComponent<void, Props, State> {
   static propTypes = {
     renderNavigator: PropTypes.func.isRequired,
   };
@@ -123,7 +122,7 @@ export default class NavigationRoot extends Component<void, Props, State> {
   };
 
   _handleNavigate = ({ type, route }: NavigationAction) => {
-    dismissKeyboard();
+    Keyboard.dismiss();
 
     const nextNavigationState = this._reduceState(this.state.navigation, {
       type,

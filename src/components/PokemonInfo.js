@@ -2,7 +2,7 @@
 
 import find from 'lodash/find';
 import memoize from 'lodash/memoize';
-import React, { PropTypes, Component } from 'react';
+import React, { PropTypes, PureComponent } from 'react';
 import {
   Image,
   InteractionManager,
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
 
   name: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontFamily: 'MontserratBold',
     marginVertical: 4,
   },
 
@@ -91,9 +91,8 @@ const styles = StyleSheet.create({
 
   tablabel: {
     color: '#222',
-    fontFamily: 'Montserrat',
+    fontFamily: 'MontserratBold',
     fontSize: 10,
-    fontWeight: 'bold',
     marginVertical: 8,
   },
 
@@ -119,7 +118,7 @@ type State = {
   loading: boolean;
 }
 
-export default class PokemonInfo extends Component<void, Props, State> {
+export default class PokemonInfo extends PureComponent<void, Props, State> {
 
   static propTypes = {
     onNavigate: PropTypes.func.isRequired,
